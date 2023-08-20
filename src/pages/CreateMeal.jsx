@@ -16,17 +16,19 @@ function CreateMeal() {
       instructions: Yup.string().required("Instructions to create the meal is required"),
     }),
     onSubmit: async (value) => {
+
       
       try {
         const res = await axios.post('http://localhost:8000/api/v1/recipes', {
           name: value.title,
           instructions: value.instructions,
           category: 'Asian',
-          userId: 4
+          userId: 4,
+          thumbnail: document.getElementById('thumbnail').files[0]
         },
         {
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'multipart/form-data'
           }
         })
 

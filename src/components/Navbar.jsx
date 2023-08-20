@@ -18,7 +18,7 @@ function Navbar() {
         return {
           id: meal.id,
           title: meal.name,
-          thumbnail: meal.imageUrl
+          thumbnail: meal.imageUrl && meal.imageUrl.replace('storage/', 'http://localhost:8000/storage/')
         }
       }
     )))
