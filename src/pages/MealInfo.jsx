@@ -12,7 +12,7 @@ function MealInfo() {
   })
 
   const fetchMeal = async () => {
-    const res = await axios(`http://localhost:8000/api/v1/recipes/${id}`)
+    const res = await axios(`${import.meta.env.VITE_BASE_URL}/api/v1/recipes/${id}`)
     const mealResult = res.data.data
     const mealObj = {
       title: mealResult.name,

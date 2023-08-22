@@ -20,7 +20,7 @@ function CreateMeal() {
       
       console.log('hello')
       try {
-        const res = await axios.post('http://localhost:8000/api/v1/recipes', {
+        const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/api/v1/recipes`, {
           name: value.title,
           instructions: value.instructions,
           category: 'Asian',

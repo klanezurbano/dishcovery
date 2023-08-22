@@ -13,14 +13,14 @@ function Navbar() {
   const loggedInUser = useSelector(state => state.loggedInUser);
   
   const fetchMeals = async () => {
-    const res = await axios('http://localhost:8000/api/v1/recipes')
+    const res = await axios(`${import.meta.env.VITE_BASE_URL}/api/v1/recipes`)
 
     dispatch(setMeals(res.data.data.map(
       meal => {
         return {
           id: meal.id,
           title: meal.name,
-          thumbnail: meal.imageUrl && meal.imageUrl.replace('storage/', 'http://localhost:8000/storage/')
+          thumbnail: meal.imageUrl && meal.imageUrl.replace('storage/', `${import.meta.env.VITE_BASE_URL}/storage/`)
         }
       }
     )))
