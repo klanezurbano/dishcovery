@@ -16,8 +16,9 @@ function CreateMeal() {
       instructions: Yup.string().required("Instructions to create the meal is required"),
     }),
     onSubmit: async (value) => {
-
+      const token = '8|YWWdDTdTgyDLX1U5gaeXIhrxIok62b0UNq8gd1ee';
       
+      console.log('hello')
       try {
         const res = await axios.post('http://localhost:8000/api/v1/recipes', {
           name: value.title,
@@ -28,9 +29,12 @@ function CreateMeal() {
         },
         {
           headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}`
           }
         })
+
+        console.log(res);
 
         if (res.status === 201) {
           new Toast(document.getElementById('liveToast')).show()

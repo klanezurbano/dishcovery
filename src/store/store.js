@@ -5,6 +5,7 @@ import { favoriteMealsSlice } from "./favoriteMealsReducer";
 import storage from 'redux-persist/lib/storage'
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk"
+import { loggedInUserSlice } from "./loggedInUserReducer";
 
 const persistConfig = {
   key: 'root',
@@ -14,7 +15,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   meals: mealsSlice.reducer,
   isLoading: isLoadingSlice.reducer,
-  favoriteMeals: favoriteMealsSlice.reducer
+  favoriteMeals: favoriteMealsSlice.reducer,
+  loggedInUser: loggedInUserSlice.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

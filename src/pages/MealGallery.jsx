@@ -10,6 +10,7 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons"
 function MealGallery() {
   const meals = useSelector(state => state.meals)
   const isLoading = useSelector(state => state.isLoading)
+  const loggedInUser = useSelector(state => state.loggedInUser)
 
   useEffect(() => {
     document.title = 'Meal Gallery'
@@ -20,9 +21,12 @@ function MealGallery() {
       <main className="d-flex align-items-start">
         <FilterPanel />
         <div className="d-flex flex-column w-75 m-3">
-          <Link to="/create" className="btn btn-primary align-self-end">
-            <FontAwesomeIcon icon={faPlus} /> Create Meal
-          </Link>
+          {
+            loggedInUser && 
+            <Link to="/create" className="btn btn-primary align-self-end">
+              <FontAwesomeIcon icon={faPlus} /> Create Meal
+            </Link>
+          }
           <div className="d-flex flex-wrap">
             {
               isLoading ? <LoadingSpinner /> : meals.map(

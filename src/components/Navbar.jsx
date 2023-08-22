@@ -1,14 +1,16 @@
 import axios from "axios"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { setMeals } from "../store/mealsReducer"
 import { markLoading, unmarkLoading } from "../store/isLoadingReducer"
 import { useEffect } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faHeart } from "@fortawesome/free-regular-svg-icons"
+import { setUser } from "../store/loggedInUserReducer"
 
 function Navbar() {
   const dispatch = useDispatch()
+  const loggedInUser = useSelector(state => state.loggedInUser);
   
   const fetchMeals = async () => {
     const res = await axios('http://localhost:8000/api/v1/recipes')
@@ -23,6 +25,10 @@ function Navbar() {
       }
     )))
     dispatch(unmarkLoading())
+  }
+
+  const logout = () => {
+    dispatch(setUser(null));
   }
 
   useEffect(() => {
@@ -51,6 +57,9 @@ function Navbar() {
           <button className="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
             <FontAwesomeIcon icon={faHeart}/> Favorites
           </button>
+          {
+            loggedInUser && <button className="btn btn-link" onClick={logout}>Logout</button>
+          }
         </div>
       </nav>
     </>

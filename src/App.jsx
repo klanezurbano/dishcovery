@@ -9,6 +9,8 @@ import NotFound from "./pages/NotFound"
 import FavoriteMealsOffcanvas from "./components/FavoriteMealsOffcanvas"
 import { PersistGate } from "redux-persist/integration/react"
 import CreateMeal from "./pages/CreateMeal"
+import LoginPage from "./pages/LoginPage"
+import Protected from "./components/Protected"
 
 function App() {
   return (
@@ -20,9 +22,14 @@ function App() {
             <Navbar />
             <Routes>
               <Route path="/" element={<Home/>}/>
+              <Route path="/login" element={<LoginPage/>}/>
               <Route path="/meal-gallery" element={<MealGallery/>}/>
               <Route path="/meal/:id" element={<MealInfo/>}/>
-              <Route path="/create" element={<CreateMeal />}/>
+              <Route path="/create" element={
+                <Protected>
+                  <CreateMeal />
+                </Protected>
+              }/>
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
